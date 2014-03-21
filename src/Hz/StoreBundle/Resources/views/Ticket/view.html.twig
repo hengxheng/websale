@@ -1,0 +1,202 @@
+{% extends 'HzStoreBundle:Default:layout.html.twig' %}
+{% block page_title %}
+	<h2 class="content-title">Ticket: {{ data.code }}</h2>
+	<a class="content-header-button buttons" href="{{ path('_ticket_edit',{ code: data.code })}}">Edit</a>
+{% endblock %}
+{% block content_body %}
+	<table class="content-table">
+		<tr>
+			<th colspan="4">Customer Information <a id="emailto" href="#" class="orange_buttons small-btn" style="float:right;">Email</a></th>
+		</tr>
+		<tr>
+			<td>First Name</td>
+			<td>{{data.firstname}}</td>
+			<td>Last Name</td>
+			<td>{{data.lastname}}</td>
+		</tr>
+		<tr>
+			<td>Email</td>
+			<td>{{data.email}}</td>
+			<td>Phone</td>
+			<td>{{data.phone}}</td>
+		</tr>
+		<tr>
+			<td>Address</td>
+			<td colspan="3">{{data.address1}} {{data.address2}}</td>
+		</tr>
+		<tr>
+			<td>Suburb</td>
+			<td>{{data.suburb }}</td>
+			<td>Postcode</td>
+			<td>{{data.postcode }}</td>
+		</tr>
+
+		<tr>
+			<th colspan="4">Repair Machine</th>
+		</tr>
+	
+		<tr>
+			<td>Serial No.</td>
+			<td>{{data.serial}}</td>
+			<td>Brand</td>
+			<td>{{data.brand}}</td>
+		</tr>
+		<tr>
+			<td>Model</td>
+			<td>{{data.model}}</td>
+			<td>Password</td>
+			<td>{{ data.password }}</td>
+		</tr>
+		<tr>
+			<td>Reference NO.</td>
+			<td>{{ data.reference }}</td>
+		</tr>
+		{% if accessories %}
+		<tr>
+			<th colspan="4">Accessory</th>
+		</tr>
+			{% for ac in accessories %}
+			  {% if ac.type == "other" %}
+			  	<tr>
+			  		<td colspan="4">{{ ac.comments }}</td>
+			  	</tr>
+			  {% else %}
+				<tr>
+					<td colspan="4">{{ ac.type }}</td>
+				</tr>
+			  {% endif %}
+			{% endfor %}
+		{% endif %}
+		</table>
+		<br/>
+		<table class="content-table">
+		<tr>
+			<th colspan="4">Technician</th>
+		</tr>
+		{% if (data.t_firstname or data.t_lastname) %}	
+		<tr>
+			<td colspan="2">Name</td>
+			<td colspan="2">{{data.t_firstname}} {{data.t_lastname}}</td>
+		</tr>
+		{% else %}
+		<tr>
+			<td colspan="4">No technician working on this ticket</td>			
+		</tr>
+		{% endif %}
+		<tr>
+			<td colspan="4"><a class="orange_buttons assign_tech">Assign To</a>
+				<div class="tech-list" style="display:none;">
+					<ul>
+					{% for tech in technicians %}
+						<li><a href="{{ path('_assign_ticket',{ 'ticket_id': data.id, 'tech_id': tech.id }) }}">{{ tech.firstname }} {{ tech.lastname }}</a></li>
+					{% endfor %}
+					</ul>		
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th colspan="4">Ticket Status</th>
+		</tr>
+		<tr>
+			<td  colspan="4">
+			<select id="status" name="status">
+				<option value="{{ data.status }}">{{ data.status }}</option>
+				<option value="Pending">Pending</option>
+				<option value="Checked">Checked</option>
+				<option value="Quoted">Quoted</option>
+				<option value="Confirmed">Confirmed</option>
+				<option value="Processing">Processing</option>
+				<option value="Waiting">Waiting</option>
+				<option value="Completed">Completed</option>
+				<option value="Pickuped">Pick-uped</option>
+			</select>
+			</td>
+		</tr>
+	</table>
+	<div class="content-info-box">
+		<div class="info-box">
+			<h4 class="info-box-title">Description:</h4>
+			<div class="info-box-content">
+				<p>{{data.comments}}</p>
+			</div>
+		</div>
+			<p>Price: ${{ data.price }}</p>
+	</div>
+	<div class="comments">
+		<div class="comments-title">
+			<h2>Comments</h2>
+		</div>
+			{% if comments %}
+				{% for comment in comments %}
+					<div class="content-info-box">
+						<div class="info-box">
+							<div class="info-box-content comment-content">
+								<p>{{comment.content}}</p>
+							</div>
+						</div>
+						<p>{{ comment.username }}</p>
+						<p>{{ comment.createDate |  date("m-d-Y H:i:s") }} </p>
+					</div>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="new_comments">
+	<form action="{{path("_comment_post")}}" method="post">
+		<textarea name="content" style="width:100%; height:100px;"></textarea>
+		<input type="submit" name="post" value="post"/>
+		<input type="hidden" name="ticket_id" value="{{data.id}}" />
+	</form>
+	</div>
+
+	<div class="popup-box email">
+	<h3>Email to {{ data.firstname }} {{ data.lastname }} ({{ data.email }})</h3>
+
+		<textarea id="msg" name="msg"></textarea>
+		<button id="email_send" class="buttons right" >Send</button>
+		<button id="email_cancel" class="buttons right" >Cancel</button>
+	</div>
+	<script>
+$(function(){
+	$("#emailto").click(function(e){
+		e.preventDefault();
+		$(".email").show();
+	});
+
+	$("#email_cancel").click(function(){
+		$(".email").hide();
+	});
+
+	$("#email_send").click(function(){
+		$.ajax({
+			url: "{{ path('_email_customer')}}",
+			type: "POST",
+			data: {
+				"c_name": "{{ data.lastname }}",
+				"c_email": "{{ data.email }}",
+				"ticket": "{{ data.code }}",
+				"msg" : $("#msg").val()
+			},
+			success:function(results){
+				console.log(results);
+			}
+		});
+		$(".email").hide();
+	});
+
+
+	$("#status").on("change",function(){
+		var status = $(this).val();
+		$.ajax({
+			url: "{{ path('_ticket_status')}}",
+			type: "POST",
+			data: {id : {{ data.id }} , status: status },
+			success:function(result){
+				console.log(result);
+			}});		
+	});
+});
+</script>
+{% endblock %}
+

@@ -1,0 +1,37 @@
+{% extends 'HzStoreBundle:Default:layout.html.twig' %}
+
+{% block content_body %}
+<div class="search-box">
+	<form action="{{ path('_ticket_search')}}" method="post">
+	<input type="text" name="term" /a>
+	<input type="submit" name="submit" value="search" />
+	</form>
+</div>
+
+<h3 class="content-sub-title">Tickets</h3>
+
+<table class="content-table">
+	<tr>
+		<th>Customer</th>
+		<th>Model</th>
+		<th>Create Date</th>
+		<th>Due Date</th>
+		<th>Status</th>
+		<th>Technician</th>
+		<th>&nbsp;</th>
+	</tr>
+	{% for ticket in tickets %}
+	<tr>
+		<td>{{ ticket.firstname}} {{ticket.lastname}}</td>
+		<td>{{ ticket.model}}</td>
+		<td>{{ ticket.createDate | date("M/d/Y") }}</td>
+		<td>{{ ticket.dueDate | date("M/d/Y") }}</td>
+		<td>{{ ticket.status }}</td>
+		<td>{{ ticket.t_firstname }} {{ ticket.t_lastname }}</td>
+		<td><a href="{{ path('_ticket_view',{'code': ticket.code}) }}">View</a></td>
+
+	</tr>
+	{% endfor %}
+</table>
+
+{% endblock %}

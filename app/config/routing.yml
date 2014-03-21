@@ -1,0 +1,13 @@
+hz_store:
+    resource: "@HzStoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+login:
+    path:     /login
+    defaults: { _controller: HzStoreBundle:Security:login }
+
+login_check:
+    path: /login_check
+    
+logout:
+    path:   /logout

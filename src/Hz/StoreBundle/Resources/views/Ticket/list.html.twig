@@ -1,0 +1,100 @@
+{% extends 'HzStoreBundle:Default:layout.html.twig' %}
+
+{% block content_body %}
+<div class="search-box">
+	<form action="{{ path('_ticket_search')}}" method="post">
+	<input type="text" name="term" /a>
+	<input type="submit" name="submit" value="search" />
+	</form>
+</div>
+    <h3 class="content-sub-title">New Tickets</h3>
+	<table class="content-table">
+		<tr>
+			<th>Customer</th>
+			<th>Model</th>
+			{# <th>Create Date</th> #}
+			<th>Due Date</th>
+			<th>Status</th>
+			<th>Assign To</th>
+			<th>Priority</th>
+			<th>&nbsp;</th>
+		</tr>
+		{% for ticket in new_tickets %}
+		<tr>
+			<td>{{ ticket.firstname}} {{ticket.lastname}}</td>
+			<td>{{ ticket.model}}</td>
+			{# <td>{{ ticket.createDate | date("M/d/Y") }}</td> #}
+			<td>{{ ticket.dueDate | date("M/d/Y") }}</td>
+			<td>{{ ticket.status}}</td>
+			<td><a class="orange_buttons assign_tech">Assign To</a>
+				<div class="tech-list" style="display:none;">
+					<ul>
+					{% for tech in technicians %}
+						<li><a href="{{ path('_assign_ticket',{ 'ticket_id': ticket.id, 'tech_id': tech.id }) }}">{{ tech.firstname }} {{ tech.lastname }}</a></li>
+					{% endfor %}
+					</ul>		
+				</div>
+			</td>
+			<td
+			{% if (ticket.left <= 2) %}
+				class="high"
+			{% elseif ((ticket.left <= 7) and (ticket.left > 2)) %}
+				class="middle"
+			{% else %}
+				class="low"
+			{% endif %}
+			>{{ ticket.left }} days left</td>
+			<td><a href="{{ path('_ticket_view',{'code': ticket.code}) }}">View</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	<h3 class="content-sub-title">Other Tickets</h3>
+
+	<table class="content-table">
+		<tr>
+			<th>Customer</th>
+			<th>Model</th>
+			{# <th>Create Date</th> #}
+			<th>Due Date</th>
+			<th>Status</th>
+			<th>Technician</th>
+			<th>Priority</th>
+			<th>&nbsp;</th>
+		</tr>
+		{% for ticket in tickets %}
+		<tr>
+			<td>{{ ticket.firstname}} {{ticket.lastname}}</td>
+			<td>{{ ticket.model}}</td>
+			{# <td>{{ ticket.createDate | date("M/d/Y") }}</td> #}
+			<td>{{ ticket.dueDate | date("M/d/Y") }}</td>
+			<td>{{ ticket.status }}</td>
+			<td>{{ ticket.t_firstname }} {{ ticket.t_lastname }}</td>
+			<td 
+			{% if (ticket.left <= 2) %}
+				class="high"
+			{% elseif ((ticket.left <= 7) and (ticket.left > 2)) %}
+				class="middle"
+			{% else %}
+				class="low"
+			{% endif %}
+			>{{ ticket.left }} days left</td>
+			<td><a href="{{ path('_ticket_view',{'code': ticket.code}) }}">View</a></td>
+	
+		</tr>
+		{% endfor %}
+	</table>
+
+	
+
+	<script>
+	// function assignTo(url){
+	// 	$(".popup-bg").show();
+	// 	$(".popup-box").show();
+	// 		$.ajax({
+	// 			url: url,
+	// 			success:function(result){
+	// 				$(".popup-box").html(result);
+	// 			}});
+	// }
+	</script>
+{% endblock %}

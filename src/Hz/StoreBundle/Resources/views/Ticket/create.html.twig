@@ -1,0 +1,80 @@
+{% extends 'HzStoreBundle:Default:layout.html.twig' %}
+{% block page_title %}
+	<h2 class="content-title">Ticket: {{ticket.code}}</h2>
+{% endblock %}
+{% block content_body %}
+	<table class="content-table">
+		<tr>
+			<th colspan="4">Customer Information</th>
+		</tr>
+		<tr>
+			<td>First Name</td>
+			<td>{{customer.firstname}}</td>
+			<td>Last Name</td>
+			<td>{{customer.lastname}}</td>
+		</tr>
+		<tr>
+			<td>Email</td>
+			<td>{{customer.email}}</td>
+			<td>Phone</td>
+			<td>{{customer.phone}}</td>
+		</tr>
+		<tr>
+			<td >Address</td>
+			<td colspan="3">{{customer.address1}} {{customer.address2}}</td>
+		</tr>
+		<tr>
+			<td>Suburb</td>
+			<td>{{customer.suburb }}</td>
+			<td>Postcode</td>
+			<td>{{customer.postcode }}</td>
+		</tr>
+
+		<tr>
+			<th colspan="4">Repair Machine</th>
+		</tr>
+	
+		<tr>
+			<td>Serial No.</td>
+			<td>{{machine.serial}}</td>
+			<td>Brand</td>
+			<td>{{machine.brand}}</td>
+		</tr>
+		<tr>
+			<td>Model</td>
+			<td>{{machine.model}}</td>
+			<td>Password</td>
+			<td>{{ machine.password }}</td>
+		</tr>
+		{% if accessories %}
+		<tr>
+			<th colspan="4">Accessory</th>
+		</tr>
+			{% for ac in accessories %}
+			  {% if ac.type == "other" %}
+			  	<tr>
+			  		<td colspan="4">{{ ac.comments }}</td>
+			  	</tr>
+			  {% else %}
+				<tr>
+					<td colspan="4">{{ ac.type }}</td>
+				</tr>
+			  {% endif %}
+			{% endfor %}
+		{% endif %}
+	</table>
+	
+	<div class="content-info-box">
+		<div class="info-box">
+			<h4 class="info-box-title">Description:</h4>
+			<div class="info-box-content">
+				<p>{{machine.comments}}</p>
+			</div>
+		</div>
+			<p>Price: ${{ ticket.price }}</p>
+	<p>Date: {{ticket.CreateDate | date('Y-m-d')}}</p>
+	<p>Due Date: {{ ticket.DueDate | date('Y-m-d') }}</p>
+	</div>
+
+
+{% endblock %}

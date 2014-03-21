@@ -1,0 +1,29 @@
+{% extends 'HzStoreBundle:Default:layout.html.twig' %}
+
+{% block content_body %}
+   <h3 class="content-sub-title">{{list_name}}
+	<a class="buttons" style="float:right; width: 153px; margin-bottom: 20px;" href="{{ path('_technician_add')}}">New technician</a>
+   </h3>
+
+	<table class="content-table">
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Email</th>
+			<th>Phone</th>
+			<th>Suburb</th>
+			<th>Action</th>
+		</tr>
+		{% for technician in technicians %}
+		<tr>
+			<td>{{ technician.firstname }}</td>
+			<td>{{ technician.lastname }}</td>
+			<td>{{ technician.email }}</td>
+			<td>{{ technician.phone }}</td>
+			<td>{{ technician.suburb }}</td>
+			<td><a href="{{ path('_technician_view', {'tech_id': technician.id } ) }}">View</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+
+{% endblock %}

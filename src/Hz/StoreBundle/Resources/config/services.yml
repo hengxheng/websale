@@ -1,0 +1,7 @@
+parameters:
+#    hz_store.example.class: Hz\StoreBundle\Example
+
+services:
+#    hz_store.example:
+#        class: %hz_store.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,8 @@
+{% extends 'HzStoreBundle:Default:layout.html.twig' %}
+{% form_theme form 'HzStoreBundle:Form:fields.html.twig' %}
+
+{% block content_body %}
+<div class="form_box">
+  {{ form(form) }}
+</div>
+{% endblock %}

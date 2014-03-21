@@ -1,0 +1,83 @@
+_homepage:
+    pattern:  /
+    defaults: { _controller: HzStoreBundle:Default:index }
+
+_customer:
+    pattern: /customer
+    defaults: { _controller: HzStoreBundle:Customer:index }
+
+_customer_add:
+    pattern: /customer/add
+    defaults: { _controller: HzStoreBundle:Customer:create }
+
+_customer_view:
+    pattern: /customer/view/{customer_id}
+    defaults: { _controller: HzStoreBundle:Customer:view }
+
+_customer_remove:
+    pattern: /customer/remove/{customer_id}
+    defaults: { _controller: HzStoreBundle:Customer:remove }
+
+_customer_search:
+    pattern: /customer/search
+    defaults: {_controller: HzStoreBundle:Customer:search }
+
+_machine_add:
+   pattern: /machine/add/{customer_id}
+   defaults: { _controller: HzStoreBundle:Machine:create }
+
+_ticket:
+   pattern: /ticket
+   defaults: {_controller: HzStoreBundle:Ticket:index}
+
+_ticket_add:
+   pattern: /ticket/generated
+   defaults: { _controller: HzStoreBundle:Ticket:create }
+
+_ticket_edit:
+  pattern: /ticket/edit/{code}
+  defaults: { _controller: HzStoreBundle:Ticket:edit }
+
+_ticket_view:
+  pattern: /ticket/view/{code}
+  defaults: { _controller: HzStoreBundle:Ticket:view }
+
+_ticket_search:
+  pattern: /ticket/search
+  defaults: { _controller: HzStoreBundle:Ticket:search }
+
+_ticket_status:
+  pattern: /ticket/status
+  defaults: { _controller: HzStoreBundle:Ticket:changeStatus }
+
+_technician:
+  pattern: /technician
+  defaults: { _controller: HzStoreBundle:Technician:index }
+
+_technician_ajax_list:
+  pattern: /technician/ajax/list/{ticket_id}
+  defaults: { _controller: HzStoreBundle:Technician:listForAssign }
+
+_technician_add:
+  pattern: /technician/add
+  defaults: { _controller: HzStoreBundle:Technician:create }
+
+_technician_view: 
+  pattern: /technician/view/{tech_id}
+  defaults: { _controller: HzStoreBundle:Technician:view }
+
+_technician_remove:
+  pattern: /technician/remove/{tech_id}
+  defaults: { _controller: HzStoreBundle:Technician:remove }
+
+_assign_ticket:
+  pattern: /ticket/assign/{ticket_id}/{tech_id}
+  defaults: { _controller: HzStoreBundle:Ticket:assignTo }
+
+_comment_post:
+  pattern: /comment/post
+  defaults: { _controller: HzStoreBundle:Comment:post }
+
+_email_customer:
+  pattern: /email/customer
+  defaults: { _controller: HzStoreBundle:Ticket:email }

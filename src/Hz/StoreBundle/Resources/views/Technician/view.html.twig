@@ -1,0 +1,74 @@
+{% extends 'HzStoreBundle:Default:layout.html.twig' %}
+{% form_theme form 'HzStoreBundle:Form:fields.html.twig' %}
+
+{% block content_body %}
+<div class="form_box">
+  {{ form(form) }}
+</div>
+
+
+{% if working %}
+<h3 class="content-sub-title">Workiing Tickets</h3>
+<table class="content-table">
+	<tr>
+		<th>Customer</th>
+		<th>Model</th>
+		<th>Create Date</th>
+		<th>Due Date</th>
+		<th>Status</th>
+	</tr>
+	{% for ticket in working %}
+	<tr>
+		<td>{{ ticket.firstname}} {{ticket.lastname}}</td>
+		<td>{{ ticket.model}}</td>
+		<td>{{ ticket.createDate | date("M/d/Y") }}</td>
+		<td>{{ ticket.dueDate | date("M/d/Y") }}</td>
+		<td>{{ ticket.status}}</td>	
+	</tr>
+	{% endfor %}
+</table>
+{% else %}
+<div class="content-info-box">
+	<div class="info-box">
+		<h4 class="info-box-title">Working Tickets</h4>
+		<div class="info-box-content">
+			<p>No working with any ticket</p>
+		</div>
+	</div>
+</div>
+{% endif %}
+
+
+
+
+{% if history  %}
+<h3 class="content-sub-title">History Tickets</h3>
+<table class="content-table">
+	<tr>
+		<th>Customer</th>
+		<th>Model</th>
+		<th>Create Date</th>
+		<th>Due Date</th>
+		<th>Status</th>
+	</tr>
+	{% for ticket in history %}
+	<tr>
+		<td>{{ ticket.firstname}} {{ticket.lastname}}</td>
+		<td>{{ ticket.model}}</td>
+		<td>{{ ticket.createDate | date("M/d/Y") }}</td>
+		<td>{{ ticket.dueDate | date("M/d/Y") }}</td>
+		<td>{{ ticket.status}}</td>	
+	</tr>
+	{% endfor %}
+</table>
+{% else %}
+<div class="content-info-box">
+	<div class="info-box">
+		<h4 class="info-box-title">History Tickets</h4>
+		<div class="info-box-content">
+			<p>No any history ticket</p>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

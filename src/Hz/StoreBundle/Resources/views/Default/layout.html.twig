@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<head>
+  <title>Online Repair Store Management System</title>
+  <link href="{{ asset('bundles/hzstore/css/stylesheets/style.css') }}" type="text/css" rel="stylesheet" />
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="{{ asset('bundles/hzstore/js/javascript.js') }}"></script>
+
+</head>
+<body>
+  <div class="page">
+		<header>
+		<div class="header-content">
+			<div class="logo">
+				<img src="{{ asset('bundles/hzstore/images/logo.jpg') }}"/>
+			</div>
+		</div>
+		<div class="menu">
+		{% block menu %}
+			<div class="breadcrumbs">
+				<ul>
+					<li><a href="{{ path('_homepage') }}">Dashboard</a></li>
+					<li class="seperator">|</li>
+					<li><a href="{{ path('_customer') }}">Customers</a></li>
+					<li class="seperator">|</li>
+					<li><a href="{{ path('_ticket') }}">Tickets</a></li>
+					<li class="seperator">|</li>
+					<li><a href="{{ path('_technician') }}">Technicians</a></li>
+					<li class="seperator">|</li>
+					<li><a href="{{ path('_customer_add') }}">Leads</a></li>
+				</ul>
+			</div>
+			<div class="menu-items">
+				{{ app.user.username }} (<a href="{{ path('logout')}}">Logout</a>)
+			</div>
+		{% endblock %}
+		</div>
+
+		</header>
+		<div class="container">
+			<!-- <div class="sidebar">
+				<ul class="sidebar-menu">
+					<li><a href="#">AMC</a></li>
+					<li><a href="#">AMC</a></li>
+					<li><a href="#">AMC</a></li>
+					<li class="selected"><a class="selected" href="#">Merisant</a>
+						<div class="sec-lv-menu">
+							<ul class="sidebar-sec-lv-menu">
+								<li class="selected"><a class="selected" href="#">Equal-APAC</a>
+									<div class="trd-lv-menu">
+										<ul class="sidebar-trd-lv-menu">
+											<li><a href="#">Design</a></li>
+											<li><a href="#">Stage</a></li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li><a href="#">AMC</a></li>
+					<li><a href="#">AMC</a></li>
+					<li><a href="#">AMC</a></li>
+					<li><a href="#">AMC</a></li>
+				</ul>
+			</div> -->
+			<div class="page-content">
+				<div class="content-header">
+					{% block page_title %}
+					<h2 class="content-title">Hello! GOOD!</h2>
+					<!-- <a class="content-header-button buttons" href="#">Edit</a> -->
+					{% endblock %}
+				</div>
+				<div class="content-body">
+				{% block content_body %}
+
+					<p>Flat HTML site for creating base html and css and javascript to be used Flat HTML site for creating base html and css and javascript to be used </p>
+					<h3 class="content-sub-title">Version Control</h3>
+
+					<table class="content-table">
+						<tr>
+							<td>View Repo: </td>
+							<td><a href="#">https://your.repo.location</a></td>
+						</tr>
+						<tr>
+							<td>View Repo: </td>
+							<td><a href="#">https://your.repo.location</a></td>
+						</tr>
+						<tr>
+							<td>View Repo: </td>
+							<td><a href="#">https://your.repo.location</a></td>
+						</tr>
+					</table>
+
+					<h3 class="content-sub-title">Hosting</h3>
+					<p>No information available</p>
+					<div class="content-info-box">
+						<h3 class="content-info-box-title">Website</h3>
+						<div class="info-box">
+							<h4 class="info-box-title">Description:</h4>
+							<div class="info-box-content">
+								<p>Only run locally</p>
+							</div>
+						</div>
+						<div class="info-box">
+							<h4 class="info-box-title">Description:</h4>
+							<div class="info-box-content">
+								<p>Only run locally</p>
+							</div>
+						</div>
+						<a class="buttons" href="#">Add</a>
+					</div>
+					{% endblock %}
+				</div>
+			</div>
+
+		</div>
+		<footer>
+		<span class="copyright">&copy;Copyright Websale Pty Lt<span>
+		</footer>
+	</div>
+
+</body>
+</html>
+

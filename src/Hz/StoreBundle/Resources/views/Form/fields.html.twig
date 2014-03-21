@@ -1,0 +1,17 @@
+{% block form_row %}
+{% spaceless %}
+    <div class="form_row">
+        <div class="form_label">{{ form_label(form) }}</div>
+        <div class="form_widget">{{ form_widget(form) }}</div>
+    </div>
+     <span class="form_error">{{ form_errors(form) }}</span>
+{% endspaceless %}
+{% endblock form_row %}
+
+{% block textarea_widget %}
+{% spaceless %}
+    <div class="textarea_widget_comments">
+        <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+    </div>
+{% endspaceless %}
+{% endblock textarea_widget %}
