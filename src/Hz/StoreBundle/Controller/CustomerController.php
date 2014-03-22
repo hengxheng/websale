@@ -85,13 +85,16 @@ class CustomerController extends Controller
                 ));
             }
 
+           
+            if( $form->get('Back')->isClicked()){
+                return $this->redirect($this->generateUrl('_customer'));
+            }
+            
             $em = $this -> getDoctrine() -> getManager();
             $em -> persist($customer);
             $em -> flush();
 
-            if( $form->get('Back')->isClicked()){
-                return $this->redirect($this->generateUrl('_customer'));
-            }
+            return $this->redirect($this->generateUrl('_customer'));
             
         }
                         

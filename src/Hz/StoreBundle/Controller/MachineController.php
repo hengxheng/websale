@@ -15,7 +15,9 @@ class MachineController extends Controller
 
     public function createAction(Request $request, $customer_id){
     	$machine = new Machine();
-		
+        $current = new \DateTime('now');
+		$today = date_format($current,"Y-m-d");
+
         $form = $this -> createFormBuilder($machine)
                         ->add('serial', 'text', array('label'=> 'Serial No.'))
                         ->add('brand', 'text')
@@ -26,14 +28,11 @@ class MachineController extends Controller
                                                 ))                                             
                         ->add('due_date', 'date',
                         					array(
-							                    "mapped" => false,
-							                ),
-                        					array(
+                                                'mapped' => false,
                                                 'input' => 'string',
-					                        	'widget' => 'choice',
-												'format' => 'yyyy-MM-dd',
-												// 'pattern' => '{{ year }}-{{ month }}-{{ dd }}',
-												// 'years' => range(Date('Y'), 2010),
+                                                'widget' => 'choice',
+                                                'format' => 'yyyy-MM-dd',
+                                                'data' => $today,
 												))
                         ->add('reference','text', array(
                                                     "mapped" => false,
@@ -72,9 +71,9 @@ class MachineController extends Controller
             $em -> persist($machine);
            
 
-            $with_bag = $form -> get('bag');
-            $with_charger = $form -> get('charger');
-            $with_battery = $form -> get('battery');
+            $with_bag = $form -> get('bag')->getData();
+            $with_charger = $form -> get('charger')->getData();
+            $with_battery = $form -> get('battery')->getData();
             $other = $form -> get('other') -> getData();;
 
             if($with_bag){
@@ -108,11 +107,10 @@ class MachineController extends Controller
             }
 
 
-            $duedate = $form->get('due_date')->getData();
+            $duedate = date_create($form->get('due_date')->getData());
             $price = $form->get('price')->getData();
             $reference = $form->get('reference')->getData();
 
-            $current = new \DateTime('now');
             $ticket = new Ticket();
             $ticket -> setMachine($machine);
             $ticket -> setCode("WS".date_format($current, 'ymdHis'));

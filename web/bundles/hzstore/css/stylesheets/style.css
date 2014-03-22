@@ -295,7 +295,7 @@ body {
 }
 /* line 211, ../sass/style.scss */
 .page .container .page-content .content-table tr td.pass {
-  background-color: grey;
+  background-color: #e3e3e3;
 }
 /* line 215, ../sass/style.scss */
 .page .container .page-content .content-table tr:nth-child(even) {

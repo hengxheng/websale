@@ -12,7 +12,6 @@
 		<tr>
 			<th>Customer</th>
 			<th>Model</th>
-			{# <th>Create Date</th> #}
 			<th>Due Date</th>
 			<th>Status</th>
 			<th>Assign To</th>
@@ -23,7 +22,6 @@
 		<tr>
 			<td>{{ ticket.firstname}} {{ticket.lastname}}</td>
 			<td>{{ ticket.model}}</td>
-			{# <td>{{ ticket.createDate | date("M/d/Y") }}</td> #}
 			<td>{{ ticket.dueDate | date("M/d/Y") }}</td>
 			<td>{{ ticket.status}}</td>
 			<td><a class="orange_buttons assign_tech">Assign To</a>
@@ -36,7 +34,9 @@
 				</div>
 			</td>
 			<td
-			{% if (ticket.left <= 2) %}
+			{% if (ticket.left <= 0 ) %}						
+				class="pass"
+			{% elseif (ticket.left <= 2) and (ticket.left > 0)%}
 				class="high"
 			{% elseif ((ticket.left <= 7) and (ticket.left > 2)) %}
 				class="middle"
@@ -54,7 +54,6 @@
 		<tr>
 			<th>Customer</th>
 			<th>Model</th>
-			{# <th>Create Date</th> #}
 			<th>Due Date</th>
 			<th>Status</th>
 			<th>Technician</th>
@@ -65,12 +64,13 @@
 		<tr>
 			<td>{{ ticket.firstname}} {{ticket.lastname}}</td>
 			<td>{{ ticket.model}}</td>
-			{# <td>{{ ticket.createDate | date("M/d/Y") }}</td> #}
 			<td>{{ ticket.dueDate | date("M/d/Y") }}</td>
 			<td>{{ ticket.status }}</td>
 			<td>{{ ticket.t_firstname }} {{ ticket.t_lastname }}</td>
 			<td 
-			{% if (ticket.left <= 2) %}
+			{% if (ticket.left <= 0 ) %}						
+				class="pass"
+			{% elseif (ticket.left <= 2) and (ticket.left > 0)%}
 				class="high"
 			{% elseif ((ticket.left <= 7) and (ticket.left > 2)) %}
 				class="middle"

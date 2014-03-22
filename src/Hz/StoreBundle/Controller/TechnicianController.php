@@ -58,12 +58,11 @@ class TechnicianController extends Controller
             $technician -> setSalt(md5(uniqid()));
             $encoder = $this->container->get('security.encoder_factory')->getEncoder($technician); 
             $technician->setPassword($encoder->encodePassword($password, $technician->getSalt()));
-            var_dump($technician);
             $em = $this -> getDoctrine() -> getManager();
             $em -> persist($technician);
             $em -> flush();
 
-            // return $this->redirect($this->generateUrl('_technician'));
+            return $this->redirect($this->generateUrl('_technician'));
         }
                         
 

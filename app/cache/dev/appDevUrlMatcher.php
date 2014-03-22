@@ -212,6 +212,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
                 }
 
+                // _ticket_pfd
+                if ($pathinfo === '/ticket/pdf') {
+                    return array (  '_controller' => 'Hz\\StoreBundle\\Controller\\TicketController::pdfAction',  '_route' => '_ticket_pfd',);
+                }
+
             }
 
             if (0 === strpos($pathinfo, '/technician')) {
@@ -250,6 +255,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => '_assign_ticket')), array (  '_controller' => 'Hz\\StoreBundle\\Controller\\TicketController::assignToAction',));
             }
 
+        }
+
+        // _assign
+        if (0 === strpos($pathinfo, '/assign') && preg_match('#^/assign/(?P<ticket_id>[^/]++)/(?P<tech_id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => '_assign')), array (  '_controller' => 'Hz\\StoreBundle\\Controller\\TicketController::assignAction',));
         }
 
         // _comment_post

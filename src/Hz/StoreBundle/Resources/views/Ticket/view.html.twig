@@ -88,7 +88,7 @@
 				<div class="tech-list" style="display:none;">
 					<ul>
 					{% for tech in technicians %}
-						<li><a href="{{ path('_assign_ticket',{ 'ticket_id': data.id, 'tech_id': tech.id }) }}">{{ tech.firstname }} {{ tech.lastname }}</a></li>
+						<li><a href="{{ path('_assign',{ 'ticket_id': data.id, 'tech_id': tech.id }) }}">{{ tech.firstname }} {{ tech.lastname }}</a></li>
 					{% endfor %}
 					</ul>		
 				</div>
@@ -121,6 +121,7 @@
 			</div>
 		</div>
 			<p>Price: ${{ data.price }}</p>
+			<p>Due Date: {{ data.dueDate | date("Y-M-d")}}</p>
 	</div>
 	<div class="comments">
 		<div class="comments-title">

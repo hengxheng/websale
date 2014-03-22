@@ -210,7 +210,7 @@ class __TwigTemplate_152de8a5bb17a44c354f0b4d4d4f25457322656b43348d92f8a823e26f5
         foreach ($context['_seq'] as $context["_key"] => $context["tech"]) {
             // line 91
             echo "\t\t\t\t\t\t<li><a href=\"";
-            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("_assign_ticket", array("ticket_id" => $this->getAttribute((isset($context["data"]) ? $context["data"] : $this->getContext($context, "data")), "id"), "tech_id" => $this->getAttribute((isset($context["tech"]) ? $context["tech"] : $this->getContext($context, "tech")), "id"))), "html", null, true);
+            echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("_assign", array("ticket_id" => $this->getAttribute((isset($context["data"]) ? $context["data"] : $this->getContext($context, "data")), "id"), "tech_id" => $this->getAttribute((isset($context["tech"]) ? $context["tech"] : $this->getContext($context, "tech")), "id"))), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["tech"]) ? $context["tech"] : $this->getContext($context, "tech")), "firstname"), "html", null, true);
             echo " ";
@@ -264,35 +264,39 @@ class __TwigTemplate_152de8a5bb17a44c354f0b4d4d4f25457322656b43348d92f8a823e26f5
         // line 123
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["data"]) ? $context["data"] : $this->getContext($context, "data")), "price"), "html", null, true);
         echo "</p>
+\t\t\t<p>Due Date: ";
+        // line 124
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute((isset($context["data"]) ? $context["data"] : $this->getContext($context, "data")), "dueDate"), "Y-M-d"), "html", null, true);
+        echo "</p>
 \t</div>
 \t<div class=\"comments\">
 \t\t<div class=\"comments-title\">
 \t\t\t<h2>Comments</h2>
 \t\t</div>
 \t\t\t";
-        // line 129
+        // line 130
         if ((isset($context["comments"]) ? $context["comments"] : $this->getContext($context, "comments"))) {
-            // line 130
+            // line 131
             echo "\t\t\t\t";
             $context['_parent'] = (array) $context;
             $context['_seq'] = twig_ensure_traversable((isset($context["comments"]) ? $context["comments"] : $this->getContext($context, "comments")));
             foreach ($context['_seq'] as $context["_key"] => $context["comment"]) {
-                // line 131
+                // line 132
                 echo "\t\t\t\t\t<div class=\"content-info-box\">
 \t\t\t\t\t\t<div class=\"info-box\">
 \t\t\t\t\t\t\t<div class=\"info-box-content comment-content\">
 \t\t\t\t\t\t\t\t<p>";
-                // line 134
+                // line 135
                 echo twig_escape_filter($this->env, $this->getAttribute((isset($context["comment"]) ? $context["comment"] : $this->getContext($context, "comment")), "content"), "html", null, true);
                 echo "</p>
 \t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t\t<p>";
-                // line 137
+                // line 138
                 echo twig_escape_filter($this->env, $this->getAttribute((isset($context["comment"]) ? $context["comment"] : $this->getContext($context, "comment")), "username"), "html", null, true);
                 echo "</p>
 \t\t\t\t\t\t<p>";
-                // line 138
+                // line 139
                 echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute((isset($context["comment"]) ? $context["comment"] : $this->getContext($context, "comment")), "createDate"), "m-d-Y H:i:s"), "html", null, true);
                 echo " </p>
 \t\t\t\t\t</div>
@@ -301,22 +305,22 @@ class __TwigTemplate_152de8a5bb17a44c354f0b4d4d4f25457322656b43348d92f8a823e26f5
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['comment'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 141
+            // line 142
             echo "\t\t\t";
         }
-        // line 142
+        // line 143
         echo "\t\t</div>
 \t</div>
 
 \t<div class=\"new_comments\">
 \t<form action=\"";
-        // line 146
+        // line 147
         echo $this->env->getExtension('routing')->getPath("_comment_post");
         echo "\" method=\"post\">
 \t\t<textarea name=\"content\" style=\"width:100%; height:100px;\"></textarea>
 \t\t<input type=\"submit\" name=\"post\" value=\"post\"/>
 \t\t<input type=\"hidden\" name=\"ticket_id\" value=\"";
-        // line 149
+        // line 150
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["data"]) ? $context["data"] : $this->getContext($context, "data")), "id"), "html", null, true);
         echo "\" />
 \t</form>
@@ -324,7 +328,7 @@ class __TwigTemplate_152de8a5bb17a44c354f0b4d4d4f25457322656b43348d92f8a823e26f5
 
 \t<div class=\"popup-box email\">
 \t<h3>Email to ";
-        // line 154
+        // line 155
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["data"]) ? $context["data"] : $this->getContext($context, "data")), "firstname"), "html", null, true);
         echo " ";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["data"]) ? $context["data"] : $this->getContext($context, "data")), "lastname"), "html", null, true);
@@ -350,21 +354,21 @@ class __TwigTemplate_152de8a5bb17a44c354f0b4d4d4f25457322656b43348d92f8a823e26f5
 \t\$(\"#email_send\").click(function(){
 \t\t\$.ajax({
 \t\t\turl: \"";
-        // line 173
+        // line 174
         echo $this->env->getExtension('routing')->getPath("_email_customer");
         echo "\",
 \t\t\ttype: \"POST\",
 \t\t\tdata: {
 \t\t\t\t\"c_name\": \"";
-        // line 176
+        // line 177
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["data"]) ? $context["data"] : $this->getContext($context, "data")), "lastname"), "html", null, true);
         echo "\",
 \t\t\t\t\"c_email\": \"";
-        // line 177
+        // line 178
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["data"]) ? $context["data"] : $this->getContext($context, "data")), "email"), "html", null, true);
         echo "\",
 \t\t\t\t\"ticket\": \"";
-        // line 178
+        // line 179
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["data"]) ? $context["data"] : $this->getContext($context, "data")), "code"), "html", null, true);
         echo "\",
 \t\t\t\t\"msg\" : \$(\"#msg\").val()
@@ -381,12 +385,12 @@ class __TwigTemplate_152de8a5bb17a44c354f0b4d4d4f25457322656b43348d92f8a823e26f5
 \t\tvar status = \$(this).val();
 \t\t\$.ajax({
 \t\t\turl: \"";
-        // line 192
+        // line 193
         echo $this->env->getExtension('routing')->getPath("_ticket_status");
         echo "\",
 \t\t\ttype: \"POST\",
 \t\t\tdata: {id : ";
-        // line 194
+        // line 195
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["data"]) ? $context["data"] : $this->getContext($context, "data")), "id"), "html", null, true);
         echo " , status: status },
 \t\t\tsuccess:function(result){
@@ -410,6 +414,6 @@ class __TwigTemplate_152de8a5bb17a44c354f0b4d4d4f25457322656b43348d92f8a823e26f5
 
     public function getDebugInfo()
     {
-        return array (  390 => 194,  385 => 192,  368 => 178,  364 => 177,  360 => 176,  354 => 173,  328 => 154,  320 => 149,  314 => 146,  308 => 142,  305 => 141,  296 => 138,  292 => 137,  286 => 134,  281 => 131,  276 => 130,  274 => 129,  265 => 123,  259 => 120,  237 => 103,  225 => 93,  212 => 91,  208 => 90,  202 => 86,  196 => 82,  188 => 79,  182 => 76,  174 => 70,  171 => 69,  165 => 68,  159 => 65,  156 => 64,  150 => 61,  147 => 60,  144 => 59,  140 => 58,  135 => 55,  133 => 54,  128 => 52,  121 => 48,  116 => 46,  109 => 42,  104 => 40,  92 => 31,  87 => 29,  78 => 25,  71 => 21,  66 => 19,  59 => 15,  54 => 13,  46 => 7,  43 => 6,  37 => 4,  32 => 3,  29 => 2,);
+        return array (  394 => 195,  389 => 193,  372 => 179,  368 => 178,  364 => 177,  358 => 174,  332 => 155,  324 => 150,  318 => 147,  312 => 143,  309 => 142,  300 => 139,  296 => 138,  290 => 135,  285 => 132,  280 => 131,  278 => 130,  269 => 124,  265 => 123,  259 => 120,  237 => 103,  225 => 93,  212 => 91,  208 => 90,  202 => 86,  196 => 82,  188 => 79,  182 => 76,  174 => 70,  171 => 69,  165 => 68,  159 => 65,  156 => 64,  150 => 61,  147 => 60,  144 => 59,  140 => 58,  135 => 55,  133 => 54,  128 => 52,  121 => 48,  116 => 46,  109 => 42,  104 => 40,  92 => 31,  87 => 29,  78 => 25,  71 => 21,  66 => 19,  59 => 15,  54 => 13,  46 => 7,  43 => 6,  37 => 4,  32 => 3,  29 => 2,);
     }
 }

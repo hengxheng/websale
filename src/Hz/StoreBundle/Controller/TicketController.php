@@ -19,10 +19,18 @@ class TicketController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $tickets = $em->getRepository('HzStoreBundle:Ticket')->findTicketsForViews();
+        $current = new \DateTime('now');
+
         foreach ($tickets as $ticket) {
-            $dayleft = date_diff($ticket['dueDate'], $ticket['createDate'])->days;
+            $dayleft = date_diff($current, $ticket['dueDate']);
             $t = $ticket;
-            $t['left'] = $dayleft;
+            
+            if($dayleft->days == 0){
+                $t['left'] = 1;
+            }
+            else{
+                $t['left'] = ($dayleft->invert)?0 : ($dayleft->days+1);
+            }
             $temp[] = $t;
         }
 
@@ -30,9 +38,15 @@ class TicketController extends Controller
 
         $new_tickets = $em->getRepository('HzStoreBundle:Ticket')->findTicketsForViewsByStatus("New");
         foreach ($new_tickets as $ticket) {
-            $dayleft = date_diff($ticket['dueDate'], $ticket['createDate'])->days;
+            $dayleft = date_diff($current, $ticket['dueDate']);
             $t = $ticket;
-            $t['left'] = $dayleft;
+            if($dayleft->days == 0){
+                $t['left'] = 1;
+            }
+            else{
+                $t['left'] = ($dayleft->invert)?0 : ($dayleft->days+1);
+            }
+           
             $_temp[] = $t;
         }
 
@@ -72,7 +86,7 @@ class TicketController extends Controller
             } 
         }
         $dueDate = date_format($data['dueDate'],"Y-m-d");
-        $form = $this -> createFormBuilder()
+            $form = $this -> createFormBuilder()
                         ->add('serial', 'text', array('label' => 'Serial No.', 'data'=>$data['serial']))
                         ->add('brand', 'text', array('data' => $data['brand']))
                         ->add('model', 'text', array('data' => $data['model']))
@@ -88,8 +102,6 @@ class TicketController extends Controller
                                                 'widget' => 'choice',
                                                 'format' => 'yyyy-MM-dd',
                                                 'data' => $dueDate,
-                                                // 'pattern' => '{{ year }}-{{ month }}-{{ dd }}',
-                                                // 'years' => range(Date('Y'), 2010),
                                                 ))
                         ->add('reference','text', array(
                                                     "mapped" => false,
@@ -246,18 +258,62 @@ class TicketController extends Controller
         $technician = $this->getDoctrine()->getRepository('HzStoreBundle:Technician')->find($tech_id);
         $t_name = $technician -> getFirstname();
 
-        $task = new task();
-        $task -> setTicket($ticket);
-        $task -> setTechnician($technician);
-
+        $ex_task = $this->getDoctrine()->getRepository('HzStoreBundle:Task')->getTaskByTicket($ticket_id);
         $current_date = new \DateTime('now');
+
+        if($ex_task){
+            $task = $this->getDoctrine()->getRepository('HzStoreBundle:Task')->find($ex_task[0]['id']);
+            $task -> setTechnician($technician);
+        }
+        else{
+            $task = new task();
+            $task -> setTicket($ticket);
+            $task -> setTechnician($technician);
+            $ticket-> setStatus("Assigned");
+                      
+        }
         $task -> setCreateDate($current_date);
 
         $em = $this -> getDoctrine() -> getManager();
         $em -> persist($task);
+        $em -> persist($ticket);
         $em -> flush();
 
+        
+        // return new Response();
         return $this->redirect($this->generateUrl('_ticket'));
+    }
+
+    public function assignAction($ticket_id, $tech_id){
+
+        $ticket = $this->getDoctrine()->getRepository('HzStoreBundle:Ticket')->find($ticket_id);
+        $technician = $this->getDoctrine()->getRepository('HzStoreBundle:Technician')->find($tech_id);
+        $t_name = $technician -> getFirstname();
+
+        $ex_task = $this->getDoctrine()->getRepository('HzStoreBundle:Task')->getTaskByTicket($ticket_id);
+        $current_date = new \DateTime('now');
+
+        if($ex_task){
+            $task = $this->getDoctrine()->getRepository('HzStoreBundle:Task')->find($ex_task[0]['id']);
+            $task -> setTechnician($technician);
+        }
+        else{
+            $task = new task();
+            $task -> setTicket($ticket);
+            $task -> setTechnician($technician);
+            $ticket-> setStatus("Assigned");
+                      
+        }
+        $task -> setCreateDate($current_date);
+
+        $em = $this -> getDoctrine() -> getManager();
+        $em -> persist($task);
+        $em -> persist($ticket);
+        $em -> flush();
+
+        var_dump($ticket->getCode());
+        // return new Response();
+        return $this->redirect($this->generateUrl('_ticket_view',array('code' => $ticket->getCode())));
     }
 
     public function changeStatusAction(Request $request){
@@ -292,5 +348,32 @@ class TicketController extends Controller
 // send email
         mail($email ,$subject, $msg, $headers);
         return new Response();
+    }
+
+
+    public function pdfAction(Request $request) {
+
+        $data  = $this -> getDoctrine() -> getRepository('HzStoreBundle:Ticket')-> findTicketsByCode("5323a77343c2b");
+        $technicians = $this -> getDoctrine() -> getRepository('HzStoreBundle:Technician') -> findAll();
+
+        $machine_id = $data['mid'];
+        $accessories = $this->getDoctrine()->getRepository('HzStoreBundle:Accessory') -> getByMachineId($machine_id);
+        $comments = $this->getDoctrine()->getRepository('HzStoreBundle:Comment')-> findCommentsByTid($data['id']);
+
+        $html =  $this -> renderView('HzStoreBundle:Ticket:view.html.twig',
+                                array( 
+                                    "data" => $data,
+                                    "accessories" => $accessories,
+                                    'technicians' => $technicians,
+                                    'comments' => $comments 
+                                 ));
+       
+
+    return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),200,array(
+                                'Content-Type'          => 'application/pdf',
+                                'Content-Disposition'   => 'attachment; filename="file.pdf"'
+                            )
+                        );
     }
 }

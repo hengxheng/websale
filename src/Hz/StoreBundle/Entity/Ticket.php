@@ -45,6 +45,14 @@ class Ticket
     /**
      * @var string
      *
+     * @ORM\Column(name="img_url", type="string", length=250, nullable=true)
+     */
+    private $imgUrl;
+
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="status", type="string", length=10)
      */
     private $status;
@@ -330,5 +338,28 @@ class Ticket
     public function getReference()
     {
         return $this->reference;
+    }
+
+    /**
+     * Set imgUrl
+     *
+     * @param string $imgUrl
+     * @return Ticket
+     */
+    public function setImgUrl($imgUrl)
+    {
+        $this->imgUrl = $imgUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get imgUrl
+     *
+     * @return string 
+     */
+    public function getImgUrl()
+    {
+        return $this->imgUrl;
     }
 }
