@@ -14,7 +14,7 @@ security:
         in_memory:
             memory:
                 users:
-                    foo: { password: bar, roles: [ 'ROLE_ADMIN' ]}
+                    foo: { password: 123, roles: [ 'ROLE_ADMIN' ]}
         user_db:
             entity: {class: Hz\StoreBundle\Entity\Technician, property: username }
 

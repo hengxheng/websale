@@ -73,13 +73,17 @@ body{
 			display:inline-block;
 	        width: 115px;
 	        font-size:1.2em;
+	        vertical-align: top;
 		}
 		.form_widget{
 			display:inline-block;
-			input[type="text"], input[type="password"]{
+			input[type="text"], input[type="password"], input[type="email"]{
 				height: 20px;
 				width: 150px;
 				@include border-radius(5px);
+			}
+			.comments-box{
+				display:block;
 			}
 		}
 		
@@ -164,7 +168,6 @@ body{
 			width:95%;
 			min-height: 400px;
 			margin:0 auto;
-			// float:right;
 			background-color:#fdfaf1;
 			@include box-sizing(border-box);
 			padding: 30px 20px;
@@ -259,7 +262,7 @@ body{
 }
 
 .tech-list{
-	padding: 10px;
+	padding: 10px 0;
 	border: 1px solid grey;
 	margin-top: 5px;
 	ul{

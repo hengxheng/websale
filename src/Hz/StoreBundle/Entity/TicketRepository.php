@@ -54,7 +54,7 @@ class TicketRepository extends EntityRepository
     public function findTicketsByCode($code) {
         $data = $this->getEntityManager()
             ->createQuery(
-                'SELECT t.id, t.status, t.code, t.dueDate, t.createDate, t.price, t.reference, m.id AS mid, m.model, m.brand, m.serial, m.comments, m.password, c.firstname, c.lastname, c.company, c.email, c.phone, c.address1, c.address2, c.suburb, c.postcode, tech.firstname AS t_firstname, tech.lastname AS t_lastname FROM HzStoreBundle:Ticket t 
+                'SELECT t.id, t.imgUrl, t.status, t.code, t.dueDate, t.createDate, t.price, t.reference, m.id AS mid, m.model, m.brand, m.serial, m.comments, m.password, c.firstname, c.lastname, c.company, c.email, c.phone, c.address1, c.address2, c.suburb, c.postcode, tech.firstname AS t_firstname, tech.lastname AS t_lastname FROM HzStoreBundle:Ticket t 
                 LEFT JOIN HzStoreBundle:Machine m WITH t.machine = m.id 
                 LEFT JOIN HzStoreBundle:Customer c WITH m.customer = c.id 
                 LEFT JOIN HzStoreBundle:Task ts WITH ts.ticket = t.id

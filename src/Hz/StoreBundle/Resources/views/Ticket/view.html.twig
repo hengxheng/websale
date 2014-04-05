@@ -51,6 +51,11 @@
 			<td>Reference NO.</td>
 			<td>{{ data.reference }}</td>
 		</tr>
+		<tr>
+		<td colspan="4">
+			<img src="{{ asset('images/machine/')}}/{{data.imgUrl}}"/>
+		</td>
+		</tr>
 		{% if accessories %}
 		<tr>
 			<th colspan="4">Accessory</th>
@@ -88,7 +93,7 @@
 				<div class="tech-list" style="display:none;">
 					<ul>
 					{% for tech in technicians %}
-						<li><a href="{{ path('_assign',{ 'ticket_id': data.id, 'tech_id': tech.id }) }}">{{ tech.firstname }} {{ tech.lastname }}</a></li>
+						<li><a href="{{ path('_assign',{ 'ticket_id': data.id, 'tech_id': tech.id }) }}"><i class="fa fa-wrench"></i>{{ tech.firstname }} {{ tech.lastname }}</a></li>
 					{% endfor %}
 					</ul>		
 				</div>

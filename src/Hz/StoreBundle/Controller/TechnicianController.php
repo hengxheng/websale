@@ -46,7 +46,7 @@ class TechnicianController extends Controller
                         ->add('suburb', 'text')
                         ->add('postcode', 'text')
                         ->add('password', 'password')
-                        ->add('confirm_password', 'text', array( "mapped" => false ))
+                        ->add('confirm_password', 'password', array( "mapped" => false ))
                         ->add('save', 'submit', array('attr' => array('class'=>'buttons')))
                         ->getForm();
 

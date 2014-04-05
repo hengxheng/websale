@@ -54,7 +54,13 @@ class MachineController extends Controller
                                                     'mapped' => false,
                                                     'required' => false
                                                 ))
-                        ->add('comments', 'textarea')
+                        ->add('comments', 'textarea', array(
+                            "label"=>"Description",
+                            "attr"=>array("class"=>"comments-box")))
+                        ->add('img','hidden',array(
+                                                "mapped" => false,
+                                                "attr" => array( "class" => "img_file")
+                                            ))
                         ->add('save', 'submit',array('attr' => array('class'=>'buttons')))
                        
                         ->getForm();
@@ -69,8 +75,8 @@ class MachineController extends Controller
  			
             $em = $this -> getDoctrine() -> getManager();
             $em -> persist($machine);
-           
-
+            
+                       
             $with_bag = $form -> get('bag')->getData();
             $with_charger = $form -> get('charger')->getData();
             $with_battery = $form -> get('battery')->getData();
@@ -120,6 +126,18 @@ class MachineController extends Controller
             $ticket -> setPrice($price);
             $ticket -> setReference($reference);
 
+            $img_data = $form -> get('img') -> getData();
+
+            if($img_data){
+                list($type, $img_data) = explode(';', $img_data);
+                list(, $img_data)      = explode(',', $img_data);
+                $img_data = base64_decode($img_data);
+                $img_name = date_format($current, 'ymdHis').'.png';
+
+                file_put_contents('bundles/hzstore/images/machine/'.$img_name, $img_data);
+                $ticket -> setImgUrl($img_name);
+            }
+
             $em -> persist($ticket);
             $em -> flush();
 
@@ -133,7 +151,7 @@ class MachineController extends Controller
         }
                         
 
-    	return $this -> render('HzStoreBundle:Customer:create.html.twig',
+    	return $this -> render('HzStoreBundle:Machine:create.html.twig',
     							array('form' => $form -> createView(),
                                     'message' => 'Customer added')
     	);

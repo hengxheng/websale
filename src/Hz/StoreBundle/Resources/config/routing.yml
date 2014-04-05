@@ -89,3 +89,15 @@ _comment_post:
 _email_customer:
   pattern: /email/customer
   defaults: { _controller: HzStoreBundle:Ticket:email }
+
+_image_upload: 
+  pattern: /upload
+  defaults: { _controller: HzStoreBundle:Ticket:upload }
+
+_message_add:
+  pattern: /message/add
+  defaults: { _controller: HzStoreBundle:Message:create }
+
+_message_remove:
+  pattern: /message/remove/{id}
+  defaults: { _controller: HzStoreBundle:Message:remove }

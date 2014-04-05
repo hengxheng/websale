@@ -21,17 +21,24 @@ class __TwigTemplate_788d4e52a24dfc244baff78e6bc5322b5cf883f3a655b1fe72ce5ce6a29
         // line 1
         echo "<!DOCTYPE html>
 <head>
-  <title>Online Repair Store Management System</title>
-  <link href=\"";
+\t<title>Online Repair Store Management System</title>
+\t<link href=\"";
         // line 4
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/hzstore/css/stylesheets/style.css"), "html", null, true);
         echo "\" type=\"text/css\" rel=\"stylesheet\" />
-  <script src=\"http://code.jquery.com/jquery-1.11.0.min.js\"></script>
-  <script src=\"";
-        // line 6
+\t<link href=\"";
+        // line 5
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/hzstore/css/font-awesome/css/font-awesome.min.css"), "html", null, true);
+        echo "\" type=\"text/css\" rel=\"stylesheet\" />
+\t<script src=\"http://code.jquery.com/jquery-1.11.0.min.js\"></script>
+\t<script src=\"";
+        // line 7
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/hzstore/js/javascript.js"), "html", null, true);
         echo "\"></script>
-
+\t<script src=\"";
+        // line 8
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/hzstore/js/photobooth_min.js"), "html", null, true);
+        echo "\"></script>
 </head>
 <body>
   <div class=\"page\">
@@ -39,16 +46,16 @@ class __TwigTemplate_788d4e52a24dfc244baff78e6bc5322b5cf883f3a655b1fe72ce5ce6a29
 \t\t<div class=\"header-content\">
 \t\t\t<div class=\"logo\">
 \t\t\t\t<img src=\"";
-        // line 14
+        // line 15
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/hzstore/images/logo.jpg"), "html", null, true);
         echo "\"/>
 \t\t\t</div>
 \t\t</div>
 \t\t<div class=\"menu\">
 \t\t";
-        // line 18
+        // line 19
         $this->displayBlock('menu', $context, $blocks);
-        // line 36
+        // line 37
         echo "\t\t</div>
 
 \t\t</header>
@@ -81,7 +88,7 @@ class __TwigTemplate_788d4e52a24dfc244baff78e6bc5322b5cf883f3a655b1fe72ce5ce6a29
 \t\t\t<div class=\"page-content\">
 \t\t\t\t<div class=\"content-header\">
 \t\t\t\t\t";
-        // line 67
+        // line 68
         $this->displayBlock('page_title', $context, $blocks);
         // line 71
         echo "\t\t\t\t</div>
@@ -105,41 +112,41 @@ class __TwigTemplate_788d4e52a24dfc244baff78e6bc5322b5cf883f3a655b1fe72ce5ce6a29
 ";
     }
 
-    // line 18
+    // line 19
     public function block_menu($context, array $blocks = array())
     {
-        // line 19
+        // line 20
         echo "\t\t\t<div class=\"breadcrumbs\">
 \t\t\t\t<ul>
 \t\t\t\t\t<li><a href=\"";
-        // line 21
+        // line 22
         echo $this->env->getExtension('routing')->getPath("_homepage");
         echo "\">Dashboard</a></li>
 \t\t\t\t\t<li class=\"seperator\">|</li>
 \t\t\t\t\t<li><a href=\"";
-        // line 23
+        // line 24
         echo $this->env->getExtension('routing')->getPath("_customer");
         echo "\">Customers</a></li>
 \t\t\t\t\t<li class=\"seperator\">|</li>
 \t\t\t\t\t<li><a href=\"";
-        // line 25
+        // line 26
         echo $this->env->getExtension('routing')->getPath("_ticket");
         echo "\">Tickets</a></li>
 \t\t\t\t\t<li class=\"seperator\">|</li>
 \t\t\t\t\t<li><a href=\"";
-        // line 27
+        // line 28
         echo $this->env->getExtension('routing')->getPath("_technician");
         echo "\">Technicians</a></li>
 \t\t\t\t\t<li class=\"seperator\">|</li>
 \t\t\t\t\t<li><a href=\"";
-        // line 29
+        // line 30
         echo $this->env->getExtension('routing')->getPath("_customer_add");
         echo "\">Leads</a></li>
 \t\t\t\t</ul>
 \t\t\t</div>
 \t\t\t<div class=\"menu-items\">
-\t\t\t\t";
-        // line 33
+\t\t\t\t<i class=\"fa fa-user\"></i> ";
+        // line 34
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user"), "username"), "html", null, true);
         echo " (<a href=\"";
         echo $this->env->getExtension('routing')->getPath("logout");
@@ -148,12 +155,11 @@ class __TwigTemplate_788d4e52a24dfc244baff78e6bc5322b5cf883f3a655b1fe72ce5ce6a29
 \t\t";
     }
 
-    // line 67
+    // line 68
     public function block_page_title($context, array $blocks = array())
     {
-        // line 68
-        echo "\t\t\t\t\t<h2 class=\"content-title\">Hello! GOOD!</h2>
-\t\t\t\t\t<!-- <a class=\"content-header-button buttons\" href=\"#\">Edit</a> -->
+        // line 69
+        echo "\t\t\t\t\t<h2 class=\"content-title\">Websale CRM</h2>
 \t\t\t\t\t";
     }
 
@@ -213,6 +219,6 @@ class __TwigTemplate_788d4e52a24dfc244baff78e6bc5322b5cf883f3a655b1fe72ce5ce6a29
 
     public function getDebugInfo()
     {
-        return array (  164 => 74,  161 => 73,  155 => 68,  152 => 67,  143 => 33,  136 => 29,  131 => 27,  126 => 25,  112 => 19,  93 => 112,  91 => 73,  85 => 67,  52 => 36,  50 => 18,  27 => 4,  22 => 1,  390 => 194,  385 => 192,  368 => 178,  364 => 177,  360 => 176,  354 => 173,  328 => 154,  320 => 149,  314 => 146,  308 => 142,  305 => 141,  296 => 138,  292 => 137,  286 => 134,  281 => 131,  276 => 130,  274 => 129,  265 => 123,  259 => 120,  237 => 103,  225 => 93,  212 => 91,  208 => 90,  202 => 86,  196 => 82,  188 => 79,  182 => 76,  174 => 70,  171 => 69,  165 => 68,  159 => 65,  156 => 64,  150 => 61,  147 => 60,  144 => 59,  140 => 58,  135 => 55,  133 => 54,  128 => 52,  121 => 23,  116 => 21,  109 => 18,  104 => 40,  92 => 31,  87 => 71,  78 => 25,  71 => 21,  66 => 19,  59 => 15,  54 => 13,  46 => 7,  43 => 14,  37 => 4,  32 => 6,  29 => 2,);
+        return array (  170 => 74,  167 => 73,  162 => 69,  159 => 68,  150 => 34,  143 => 30,  138 => 28,  133 => 26,  128 => 24,  123 => 22,  119 => 20,  116 => 19,  100 => 112,  98 => 73,  94 => 71,  92 => 68,  59 => 37,  50 => 15,  40 => 8,  36 => 7,  27 => 4,  22 => 1,  97 => 33,  88 => 30,  84 => 29,  80 => 28,  76 => 27,  72 => 26,  68 => 25,  64 => 24,  61 => 23,  57 => 19,  42 => 10,  34 => 5,  31 => 5,  28 => 3,);
     }
 }

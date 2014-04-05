@@ -20,11 +20,11 @@ class TicketController extends Controller
         $em = $this->getDoctrine()->getManager();
         $tickets = $em->getRepository('HzStoreBundle:Ticket')->findTicketsForViews();
         $current = new \DateTime('now');
-
+         $temp = array();
         foreach ($tickets as $ticket) {
             $dayleft = date_diff($current, $ticket['dueDate']);
             $t = $ticket;
-            
+           
             if($dayleft->days == 0){
                 $t['left'] = 1;
             }
@@ -37,6 +37,7 @@ class TicketController extends Controller
         $tickets = $temp;
 
         $new_tickets = $em->getRepository('HzStoreBundle:Ticket')->findTicketsForViewsByStatus("New");
+        $_temp= array();
         foreach ($new_tickets as $ticket) {
             $dayleft = date_diff($current, $ticket['dueDate']);
             $t = $ticket;
@@ -375,5 +376,10 @@ class TicketController extends Controller
                                 'Content-Disposition'   => 'attachment; filename="file.pdf"'
                             )
                         );
+    }
+
+    public function upload(Request $request) {
+        $str = file_get_contents("php://input");
+        file_put_contents("/tmp/upload.jpg", pack("H*", $str));
     }
 }

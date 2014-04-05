@@ -1,0 +1,32 @@
+{% extends 'HzStoreBundle:Default:layout.html.twig' %}
+{% form_theme form 'HzStoreBundle:Form:fields.html.twig' %}
+{% block textarea_widget %}
+{% spaceless %}
+    <div class="textarea_widget comments_box">
+        <textarea {{ block('widget_attributes') }}></textarea>
+    </div>
+{% endspaceless %}
+
+{% endblock textarea_widget %}
+
+{% block content_body %}
+<div class="cam-block" style="overflow:hidden;margin-bottom:30px;">
+<div id="webcam" style="width: 400px;height:300px;float:left;"></div>
+<div style="float:right;" id="gallery"></div>
+</div>
+<div class="clear"></div>
+<div class="form_box">
+  {{ form(form) }}
+</div>
+
+<script>
+
+$(function(){
+	$('#webcam').photobooth().on("image",function( event, dataUrl ){
+	$( "#gallery" ).html( '<img src="' + dataUrl + '" >');
+	$(".img_file").val(dataUrl);
+});
+});
+</script>
+
+{% endblock %}

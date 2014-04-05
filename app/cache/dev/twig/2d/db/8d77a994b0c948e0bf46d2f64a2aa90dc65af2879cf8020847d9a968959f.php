@@ -42,52 +42,49 @@ class __TwigTemplate_2ddb8d77a994b0c948e0bf46d2f64a2aa90dc65af2879cf8020847d9a96
 \t\t<tr>
 \t\t\t<th>Customer</th>
 \t\t\t<th>Model</th>
-\t\t\t";
-        // line 16
-        echo "\t\t\t<th>Due Date</th>
+\t\t\t<th>Due Date</th>
 \t\t\t<th>Status</th>
 \t\t\t<th>Assign To</th>
 \t\t\t<th>Priority</th>
 \t\t\t<th>&nbsp;</th>
 \t\t</tr>
 \t\t";
-        // line 22
+        // line 21
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["new_tickets"]) ? $context["new_tickets"] : $this->getContext($context, "new_tickets")));
         foreach ($context['_seq'] as $context["_key"] => $context["ticket"]) {
-            // line 23
+            // line 22
             echo "\t\t<tr>
 \t\t\t<td>";
-            // line 24
+            // line 23
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "firstname"), "html", null, true);
             echo " ";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "lastname"), "html", null, true);
             echo "</td>
 \t\t\t<td>";
-            // line 25
+            // line 24
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "model"), "html", null, true);
             echo "</td>
-\t\t\t";
-            // line 27
-            echo "\t\t\t<td>";
+\t\t\t<td>";
+            // line 25
             echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "dueDate"), "M/d/Y"), "html", null, true);
             echo "</td>
 \t\t\t<td>";
-            // line 28
+            // line 26
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "status"), "html", null, true);
             echo "</td>
 \t\t\t<td><a class=\"orange_buttons assign_tech\">Assign To</a>
 \t\t\t\t<div class=\"tech-list\" style=\"display:none;\">
 \t\t\t\t\t<ul>
 \t\t\t\t\t";
-            // line 32
+            // line 30
             $context['_parent'] = (array) $context;
             $context['_seq'] = twig_ensure_traversable((isset($context["technicians"]) ? $context["technicians"] : $this->getContext($context, "technicians")));
             foreach ($context['_seq'] as $context["_key"] => $context["tech"]) {
-                // line 33
+                // line 31
                 echo "\t\t\t\t\t\t<li><a href=\"";
                 echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("_assign_ticket", array("ticket_id" => $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "id"), "tech_id" => $this->getAttribute((isset($context["tech"]) ? $context["tech"] : $this->getContext($context, "tech")), "id"))), "html", null, true);
-                echo "\">";
+                echo "\"><i class=\"fa fa-wrench\"></i>";
                 echo twig_escape_filter($this->env, $this->getAttribute((isset($context["tech"]) ? $context["tech"] : $this->getContext($context, "tech")), "firstname"), "html", null, true);
                 echo " ";
                 echo twig_escape_filter($this->env, $this->getAttribute((isset($context["tech"]) ? $context["tech"] : $this->getContext($context, "tech")), "lastname"), "html", null, true);
@@ -97,36 +94,36 @@ class __TwigTemplate_2ddb8d77a994b0c948e0bf46d2f64a2aa90dc65af2879cf8020847d9a96
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['tech'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 35
+            // line 33
             echo "\t\t\t\t\t</ul>\t\t
 \t\t\t\t</div>
 \t\t\t</td>
 \t\t\t<td
 \t\t\t";
-            // line 39
+            // line 37
             if (($this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "left") <= 0)) {
                 echo "\t\t\t\t\t\t
 \t\t\t\tclass=\"pass\"
 \t\t\t";
             } elseif ((($this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "left") <= 2) && ($this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "left") > 0))) {
-                // line 42
+                // line 40
                 echo "\t\t\t\tclass=\"high\"
 \t\t\t";
             } elseif ((($this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "left") <= 7) && ($this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "left") > 2))) {
-                // line 44
+                // line 42
                 echo "\t\t\t\tclass=\"middle\"
 \t\t\t";
             } else {
-                // line 46
+                // line 44
                 echo "\t\t\t\tclass=\"low\"
 \t\t\t";
             }
-            // line 48
+            // line 46
             echo "\t\t\t>";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "left"), "html", null, true);
             echo " days left</td>
 \t\t\t<td><a href=\"";
-            // line 49
+            // line 47
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("_ticket_view", array("code" => $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "code"))), "html", null, true);
             echo "\">View</a></td>
 \t\t</tr>
@@ -135,7 +132,7 @@ class __TwigTemplate_2ddb8d77a994b0c948e0bf46d2f64a2aa90dc65af2879cf8020847d9a96
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['ticket'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 52
+        // line 50
         echo "\t</table>
 \t<h3 class=\"content-sub-title\">Other Tickets</h3>
 
@@ -143,72 +140,69 @@ class __TwigTemplate_2ddb8d77a994b0c948e0bf46d2f64a2aa90dc65af2879cf8020847d9a96
 \t\t<tr>
 \t\t\t<th>Customer</th>
 \t\t\t<th>Model</th>
-\t\t\t";
-        // line 60
-        echo "\t\t\t<th>Due Date</th>
+\t\t\t<th>Due Date</th>
 \t\t\t<th>Status</th>
 \t\t\t<th>Technician</th>
 \t\t\t<th>Priority</th>
 \t\t\t<th>&nbsp;</th>
 \t\t</tr>
 \t\t";
-        // line 66
+        // line 63
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["tickets"]) ? $context["tickets"] : $this->getContext($context, "tickets")));
         foreach ($context['_seq'] as $context["_key"] => $context["ticket"]) {
-            // line 67
+            // line 64
             echo "\t\t<tr>
 \t\t\t<td>";
-            // line 68
+            // line 65
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "firstname"), "html", null, true);
             echo " ";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "lastname"), "html", null, true);
             echo "</td>
 \t\t\t<td>";
-            // line 69
+            // line 66
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "model"), "html", null, true);
             echo "</td>
-\t\t\t";
-            // line 71
-            echo "\t\t\t<td>";
+\t\t\t<td>";
+            // line 67
             echo twig_escape_filter($this->env, twig_date_format_filter($this->env, $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "dueDate"), "M/d/Y"), "html", null, true);
             echo "</td>
 \t\t\t<td>";
-            // line 72
+            // line 68
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "status"), "html", null, true);
             echo "</td>
 \t\t\t<td>";
-            // line 73
+            // line 69
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "t_firstname"), "html", null, true);
             echo " ";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "t_lastname"), "html", null, true);
             echo "</td>
 \t\t\t<td 
 \t\t\t";
-            // line 75
+            // line 71
             if (($this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "left") <= 0)) {
                 echo "\t\t\t\t\t\t
 \t\t\t\tclass=\"pass\"
 \t\t\t";
             } elseif ((($this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "left") <= 2) && ($this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "left") > 0))) {
-                // line 78
+                // line 74
                 echo "\t\t\t\tclass=\"high\"
 \t\t\t";
             } elseif ((($this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "left") <= 7) && ($this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "left") > 2))) {
-                // line 80
+                // line 76
                 echo "\t\t\t\tclass=\"middle\"
 \t\t\t";
             } else {
-                // line 82
+                // line 78
                 echo "\t\t\t\tclass=\"low\"
 \t\t\t";
             }
-            // line 84
+            // line 80
             echo "\t\t\t>";
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "left"), "html", null, true);
             echo " days left</td>
 \t\t\t<td><a href=\"";
-            // line 85
+            // line 81
             echo twig_escape_filter($this->env, $this->env->getExtension('routing')->getPath("_ticket_view", array("code" => $this->getAttribute((isset($context["ticket"]) ? $context["ticket"] : $this->getContext($context, "ticket")), "code"))), "html", null, true);
             echo "\">View</a></td>
 \t
@@ -218,7 +212,7 @@ class __TwigTemplate_2ddb8d77a994b0c948e0bf46d2f64a2aa90dc65af2879cf8020847d9a96
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['ticket'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 89
+        // line 85
         echo "\t</table>
 
 \t
@@ -249,6 +243,6 @@ class __TwigTemplate_2ddb8d77a994b0c948e0bf46d2f64a2aa90dc65af2879cf8020847d9a96
 
     public function getDebugInfo()
     {
-        return array (  222 => 89,  212 => 85,  207 => 84,  203 => 82,  199 => 80,  195 => 78,  189 => 75,  182 => 73,  178 => 72,  173 => 71,  169 => 69,  163 => 68,  160 => 67,  156 => 66,  148 => 60,  139 => 52,  130 => 49,  125 => 48,  121 => 46,  117 => 44,  113 => 42,  107 => 39,  101 => 35,  88 => 33,  84 => 32,  77 => 28,  72 => 27,  68 => 25,  62 => 24,  59 => 23,  55 => 22,  47 => 16,  34 => 5,  31 => 4,  28 => 3,);
+        return array (  216 => 85,  206 => 81,  201 => 80,  197 => 78,  193 => 76,  189 => 74,  183 => 71,  176 => 69,  172 => 68,  168 => 67,  164 => 66,  158 => 65,  155 => 64,  151 => 63,  136 => 50,  127 => 47,  122 => 46,  118 => 44,  114 => 42,  110 => 40,  104 => 37,  98 => 33,  85 => 31,  81 => 30,  74 => 26,  70 => 25,  66 => 24,  60 => 23,  57 => 22,  53 => 21,  34 => 5,  31 => 4,  28 => 3,);
     }
 }

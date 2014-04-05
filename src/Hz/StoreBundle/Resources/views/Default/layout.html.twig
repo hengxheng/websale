@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <head>
-  <title>Online Repair Store Management System</title>
-  <link href="{{ asset('bundles/hzstore/css/stylesheets/style.css') }}" type="text/css" rel="stylesheet" />
-  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="{{ asset('bundles/hzstore/js/javascript.js') }}"></script>
-
+	<title>Online Repair Store Management System</title>
+	<link href="{{ asset('bundles/hzstore/css/stylesheets/style.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/hzstore/css/font-awesome/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" />
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="{{ asset('bundles/hzstore/js/javascript.js') }}"></script>
+	<script src="{{ asset('bundles/hzstore/js/photobooth_min.js') }}"></script>
 </head>
 <body>
   <div class="page">
@@ -30,7 +31,7 @@
 				</ul>
 			</div>
 			<div class="menu-items">
-				{{ app.user.username }} (<a href="{{ path('logout')}}">Logout</a>)
+				<i class="fa fa-user"></i> {{ app.user.username }} (<a href="{{ path('logout')}}">Logout</a>)
 			</div>
 		{% endblock %}
 		</div>
@@ -65,8 +66,7 @@
 			<div class="page-content">
 				<div class="content-header">
 					{% block page_title %}
-					<h2 class="content-title">Hello! GOOD!</h2>
-					<!-- <a class="content-header-button buttons" href="#">Edit</a> -->
+					<h2 class="content-title">Websale CRM</h2>
 					{% endblock %}
 				</div>
 				<div class="content-body">

@@ -3,6 +3,7 @@
 namespace Hz\StoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Hz\StoreBundle\Entity\Message;
 
 class DefaultController extends Controller
 {
@@ -10,6 +11,9 @@ class DefaultController extends Controller
     {
     	// $user = $this->get('security.context')->getToken()->getUser();
     	// var_dump($user->getUsername());
-        return $this->render('HzStoreBundle:Default:index.html.twig');
+    	$em = $this->getDoctrine()->getManager();
+        $messages = $em->getRepository('HzStoreBundle:Message')->findAll();
+       
+        return $this->render('HzStoreBundle:Default:index.html.twig',array("messages" => $messages));
     }
 }

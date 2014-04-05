@@ -272,6 +272,24 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'Hz\\StoreBundle\\Controller\\TicketController::emailAction',  '_route' => '_email_customer',);
         }
 
+        // _image_upload
+        if ($pathinfo === '/upload') {
+            return array (  '_controller' => 'Hz\\StoreBundle\\Controller\\TicketController::uploadAction',  '_route' => '_image_upload',);
+        }
+
+        if (0 === strpos($pathinfo, '/message')) {
+            // _message_add
+            if ($pathinfo === '/message/add') {
+                return array (  '_controller' => 'Hz\\StoreBundle\\Controller\\MessageController::createAction',  '_route' => '_message_add',);
+            }
+
+            // _message_remove
+            if (0 === strpos($pathinfo, '/message/remove') && preg_match('#^/message/remove/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => '_message_remove')), array (  '_controller' => 'Hz\\StoreBundle\\Controller\\MessageController::removeAction',));
+            }
+
+        }
+
         if (0 === strpos($pathinfo, '/log')) {
             if (0 === strpos($pathinfo, '/login')) {
                 // login

@@ -28,7 +28,7 @@
 				<div class="tech-list" style="display:none;">
 					<ul>
 					{% for tech in technicians %}
-						<li><a href="{{ path('_assign_ticket',{ 'ticket_id': ticket.id, 'tech_id': tech.id }) }}">{{ tech.firstname }} {{ tech.lastname }}</a></li>
+						<li><a href="{{ path('_assign_ticket',{ 'ticket_id': ticket.id, 'tech_id': tech.id }) }}"><i class="fa fa-wrench"></i>{{ tech.firstname }} {{ tech.lastname }}</a></li>
 					{% endfor %}
 					</ul>		
 				</div>
