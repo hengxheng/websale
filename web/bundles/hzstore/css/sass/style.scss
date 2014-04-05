@@ -3,6 +3,10 @@
 body{
 	font-family: arial;
 }
+.col-2{
+	float:left;
+	width:48%;
+}
 .small-btn{
 	width: 120px;
 }
@@ -169,6 +173,7 @@ body{
 			min-height: 400px;
 			margin:0 auto;
 			background-color:#fdfaf1;
+			overflow: hidden;
 			@include box-sizing(border-box);
 			padding: 30px 20px;
 			.content-header{

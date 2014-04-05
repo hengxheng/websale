@@ -2,7 +2,19 @@
 {% form_theme form 'HzStoreBundle:Form:fields.html.twig' %}
 
 {% block content_body %}
+<div class="col-2">
+<h2 class="content-sub-title">New Customer</h2>
 <div class="form_box">
   {{ form(form) }}
+</div>
+</div>
+<div class="col-2">
+<h2 class="content-sub-title">Existing Customer</h2>
+<div class="search-box">
+<form action="{{ path('_customer_search')}}" method="post">
+<input type="text" name="term" />
+<input type="submit" name="submit" value="search" />
+</form>
+</div>
 </div>
 {% endblock %}

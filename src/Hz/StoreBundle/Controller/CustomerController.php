@@ -98,7 +98,7 @@ class CustomerController extends Controller
             
         }
                         
-        return $this -> render('HzStoreBundle:Customer:create.html.twig',
+        return $this -> render('HzStoreBundle:Customer:view.html.twig',
                                 array('form' => $form -> createView(),
                                     'message' => 'Customer added')
         );

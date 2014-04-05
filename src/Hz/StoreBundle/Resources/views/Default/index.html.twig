@@ -3,6 +3,7 @@
 {% block content_body %}
 
 {% if messages %}
+<h2 class="content-sub-title">Reminders</h2>
 <div class="content-info-box">
 	{% for msg in messages %}
 		
@@ -22,9 +23,48 @@
 	{% endfor %}
 	</div>
 {% endif %}
-<p class="content-sub-title">New Reminder</p>
-<form action="{{ path('_message_add') }}" method="post" >
-<textarea name="msg" style="width:99%; height:200px;"></textarea>
-<input type="submit" value="Save" class="buttons">
-</form>
+
+{% if tickets %}
+<h2 class="content-sub-title">New Tickets</h2>
+<table class="content-table">
+		<tr>
+			<th>Customer</th>
+			<th>Model</th>
+			<th>Due Date</th>
+			<th>Status</th>
+			<th>Assign To</th>
+			<th>Priority</th>
+			<th>&nbsp;</th>
+		</tr>
+		{% for ticket in tickets %}
+		<tr>
+			<td>{{ ticket.firstname}} {{ticket.lastname}}</td>
+			<td>{{ ticket.model}}</td>
+			<td>{{ ticket.dueDate | date("M/d/Y") }}</td>
+			<td>{{ ticket.status}}</td>
+			<td><a class="orange_buttons assign_tech">Assign To</a>
+				<div class="tech-list" style="display:none;">
+					<ul>
+					{% for tech in technicians %}
+						<li><a href="{{ path('_assign_ticket',{ 'ticket_id': ticket.id, 'tech_id': tech.id }) }}"><i class="fa fa-wrench"></i>{{ tech.firstname }} {{ tech.lastname }}</a></li>
+					{% endfor %}
+					</ul>		
+				</div>
+			</td>
+			<td
+			{% if (ticket.left <= 0 ) %}						
+				class="pass"
+			{% elseif (ticket.left <= 2) and (ticket.left > 0)%}
+				class="high"
+			{% elseif ((ticket.left <= 7) and (ticket.left > 2)) %}
+				class="middle"
+			{% else %}
+				class="low"
+			{% endif %}
+			>{{ ticket.left }} days left</td>
+			<td><a href="{{ path('_ticket_view',{'code': ticket.code}) }}">View</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+{% endif %}
 {% endblock %}

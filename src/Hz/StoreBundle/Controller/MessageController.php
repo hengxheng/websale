@@ -10,6 +10,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class MessageController extends Controller
 {
 
+     public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $messages = $em->getRepository('HzStoreBundle:Message')->findAll();
+       
+        return $this->render('HzStoreBundle:Message:index.html.twig',array("messages" => $messages));
+    }
+
     public function createAction(Request $request){
     	$message = new Message();
 

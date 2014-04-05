@@ -1,0 +1,30 @@
+{% extends 'HzStoreBundle:Default:layout.html.twig' %}
+
+{% block content_body %}
+
+{% if messages %}
+<div class="content-info-box">
+	{% for msg in messages %}
+		
+		<div class="info-box">
+			<h4 class="info-box-title">User: {{ msg.authorName }} 
+			<a style="float:right;" href="{{ path('_message_remove', {id: msg.id })}}" /><i class="fa fa-trash-o"></i></a>
+			</h4>
+			<div class="info-box-content">
+				<p>{{msg.content}}</p>
+			</div>
+			<div class="info-box-content" style="text-align:right;">
+				<p>Date: {{ msg.createDate | date("Y-m-d")}}</p>
+			</div>
+		<div>
+		</div>
+		</div>
+	{% endfor %}
+	</div>
+{% endif %}
+<p class="content-sub-title">New Reminder</p>
+<form action="{{ path('_message_add') }}" method="post" >
+<textarea name="msg" style="width:99%; height:200px;"></textarea>
+<input type="submit" value="Save" class="buttons">
+</form>
+{% endblock %}

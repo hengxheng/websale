@@ -3,6 +3,7 @@
 	<title>Online Repair Store Management System</title>
 	<link href="{{ asset('bundles/hzstore/css/stylesheets/style.css') }}" type="text/css" rel="stylesheet" />
 	<link href="{{ asset('bundles/hzstore/css/font-awesome/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" />
+	<link href="{{ asset('bundles/hzstore/css/stylesheets/print.css') }}" type="text/css" rel="stylesheet" media="print"/>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="{{ asset('bundles/hzstore/js/javascript.js') }}"></script>
 	<script src="{{ asset('bundles/hzstore/js/photobooth_min.js') }}"></script>
@@ -26,6 +27,8 @@
 					<li><a href="{{ path('_ticket') }}">Tickets</a></li>
 					<li class="seperator">|</li>
 					<li><a href="{{ path('_technician') }}">Technicians</a></li>
+					<li class="seperator">|</li>
+					<li><a href="{{ path('_message') }}">Reminders</a></li>
 					<li class="seperator">|</li>
 					<li><a href="{{ path('_customer_add') }}">Leads</a></li>
 				</ul>
@@ -114,7 +117,7 @@
 
 		</div>
 		<footer>
-		<span class="copyright">&copy;Copyright Websale Pty Lt<span>
+		<span class="copyright">&copy;Copyright Websale Pty Ltd<span>
 		</footer>
 	</div>
 

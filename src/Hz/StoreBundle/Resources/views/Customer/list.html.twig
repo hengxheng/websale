@@ -27,7 +27,10 @@
 			<td>{{ customer.phone }}</td>
 			<td>{{ customer.suburb }}</td>
 			<td>{{ customer.company }}</td>
-			<td><a href="{{ path('_customer_view', {'customer_id': customer.id }) }}">View</a></td>
+			<td>
+			<a href="{{ path('_customer_view', {'customer_id': customer.id }) }}">View</a>
+			<a href="{{ path('_machine_add',{'customer_id': customer.id}) }}">New ticket</a>
+			</td>
 		</tr>
 		{% endfor %}
 	</table>

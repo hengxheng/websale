@@ -94,6 +94,9 @@ _image_upload:
   pattern: /upload
   defaults: { _controller: HzStoreBundle:Ticket:upload }
 
+_message:
+  pattern: /message
+  defaults: { _controller: HzStoreBundle:Message:index }
 _message_add:
   pattern: /message/add
   defaults: { _controller: HzStoreBundle:Message:create }

@@ -30,11 +30,26 @@ class __TwigTemplate_982ca9718258648fe5100808005df0be593d80cd3ef6d4a611cd9df7492
     public function block_content_body($context, array $blocks = array())
     {
         // line 5
-        echo "<div class=\"form_box\">
+        echo "<div class=\"col-2\">
+<h2 class=\"content-sub-title\">New Customer</h2>
+<div class=\"form_box\">
   ";
-        // line 6
+        // line 8
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form');
         echo "
+</div>
+</div>
+<div class=\"col-2\">
+<h2 class=\"content-sub-title\">Existing Customer</h2>
+<div class=\"search-box\">
+<form action=\"";
+        // line 14
+        echo $this->env->getExtension('routing')->getPath("_customer_search");
+        echo "\" method=\"post\">
+<input type=\"text\" name=\"term\" />
+<input type=\"submit\" name=\"submit\" value=\"search\" />
+</form>
+</div>
 </div>
 ";
     }
@@ -51,6 +66,6 @@ class __TwigTemplate_982ca9718258648fe5100808005df0be593d80cd3ef6d4a611cd9df7492
 
     public function getDebugInfo()
     {
-        return array (  36 => 6,  33 => 5,  30 => 4,  25 => 2,);
+        return array (  47 => 14,  38 => 8,  33 => 5,  30 => 4,  25 => 2,);
     }
 }

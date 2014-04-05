@@ -278,6 +278,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         if (0 === strpos($pathinfo, '/message')) {
+            // _message
+            if ($pathinfo === '/message') {
+                return array (  '_controller' => 'Hz\\StoreBundle\\Controller\\MessageController::indexAction',  '_route' => '_message',);
+            }
+
             // _message_add
             if ($pathinfo === '/message/add') {
                 return array (  '_controller' => 'Hz\\StoreBundle\\Controller\\MessageController::createAction',  '_route' => '_message_add',);

@@ -30,7 +30,10 @@
 			<td>Postcode</td>
 			<td>{{data.postcode }}</td>
 		</tr>
-
+		<tr>
+			<td>Company</td>
+			<td>{{ data.company}}</td>
+		</tr>
 		<tr>
 			<th colspan="4">Repair Machine</th>
 		</tr>
@@ -51,11 +54,13 @@
 			<td>Reference NO.</td>
 			<td>{{ data.reference }}</td>
 		</tr>
-		<tr>
+		{% if data.imgUrl %}
+		<tr class="machine-img">
 		<td colspan="4">
-			<img src="{{ asset('images/machine/')}}/{{data.imgUrl}}"/>
+			<img src="{{ asset('bundles/hzstore/images/machine/')}}{{data.imgUrl}}"/>
 		</td>
 		</tr>
+		{% endif %}
 		{% if accessories %}
 		<tr>
 			<th colspan="4">Accessory</th>
@@ -74,7 +79,7 @@
 		{% endif %}
 		</table>
 		<br/>
-		<table class="content-table">
+		<table class="content-table technician-table">
 		<tr>
 			<th colspan="4">Technician</th>
 		</tr>
@@ -127,6 +132,7 @@
 		</div>
 			<p>Price: ${{ data.price }}</p>
 			<p>Due Date: {{ data.dueDate | date("Y-M-d")}}</p>
+			<p class="print-button"><a href="#" class="buttons" onclick="event.preventDefault(); window.print();">Print</a><p>
 	</div>
 	<div class="comments">
 		<div class="comments-title">
